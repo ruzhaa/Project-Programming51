@@ -2,7 +2,7 @@ package project;
 
 import java.awt.EventQueue;
 
-public class HangmanPlay{
+public class HangmanPlay {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

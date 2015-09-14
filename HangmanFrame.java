@@ -20,28 +20,63 @@ import javax.swing.SwingConstants;
 
 public class HangmanFrame {
 
-	public JFrame frame;
+	public static JFrame frame;
 	protected static JLabel answer;
-	protected JLabel pandichka;
-	
+	protected static JLabel pandichka;
+
 	protected JButton start_button;
 	protected JButton exit_button;
 
-	/**
-	 * Create the application.
-	 */
+	protected static ImageIcon[] images = {
+			new ImageIcon(HangmanFrame.class.getResource("/panda-1.png")),
+			new ImageIcon(HangmanFrame.class.getResource("/panda-2.png")),
+			new ImageIcon(HangmanFrame.class.getResource("/panda-3.png")),
+			new ImageIcon(HangmanFrame.class.getResource("/panda-4.png")),
+			new ImageIcon(HangmanFrame.class.getResource("/panda-5.png")),
+			new ImageIcon(HangmanFrame.class.getResource("/panda-6.png")),
+			new ImageIcon(HangmanFrame.class.getResource("/panda-7.png")),
+			new ImageIcon(HangmanFrame.class.getResource("/panda-8.png")),
+			new ImageIcon(HangmanFrame.class.getResource("/panda-9.png")),
+			new ImageIcon(HangmanFrame.class.getResource("/panda-10.png"))};
+	
+	protected static ImageIcon partyPanda = new ImageIcon(HangmanFrame.class.getResource("/panda-happy.png"));
+	//protected static ImageIcon cryPanda = new ImageIcon(HangmanFrame.class.getResource("/panda-cry.png"));
+
 	public HangmanFrame() {
 		initialize();
-		
+
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	protected void initialize() {
+	public void initialize() {
+
+		// frame
+
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 255, 240));
 		frame.getContentPane().setLayout(null);
+
+		frame.setBackground(new Color(255, 192, 203));
+		frame.setIconImage(Toolkit
+				.getDefaultToolkit()
+				.getImage(
+						"D:\\Documents\\HackBulgaria\\Test\\Img\\ef282c4872e55b328a5535cdca0786eb.jpg"));
+		frame.setAlwaysOnTop(true);
+		frame.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+		frame.setBounds(new Rectangle(0, 0, 1200, 600));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setTitle("Hangman");
+		frame.setLocationRelativeTo(null);
+
+		// pandichka-images
+
+		pandichka = new JLabel("");
+		pandichka.setHorizontalAlignment(SwingConstants.CENTER);
+		pandichka.doLayout();
+		pandichka.setBounds(649, 137, 377, 358);
+		frame.getContentPane().add(pandichka);
+
+		// keyboard
 
 		JButton Q = new JButton("Q");
 		Q.addMouseListener(new Mouse(Q));
@@ -277,12 +312,16 @@ public class HangmanFrame {
 		M.setBounds(424, 451, 45, 34);
 		frame.getContentPane().add(M);
 
+		// start-button
+
 		start_button = new JButton("START");
-		
 		start_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HangmanMethods.choiseNewWord();
-				start_button.setText("NEW GAME");
+		
+				pandichka.setIcon(images[0]);
+	
+				start_button.setEnabled(false);
 				Q.setEnabled(true);
 				W.setEnabled(true);
 				E.setEnabled(true);
@@ -317,6 +356,8 @@ public class HangmanFrame {
 		start_button.setBounds(1002, 39, 159, 85);
 		frame.getContentPane().add(start_button);
 
+		// exit-button
+
 		exit_button = new JButton("EXIT");
 		exit_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -329,8 +370,9 @@ public class HangmanFrame {
 		exit_button.setBounds(1064, 496, 97, 42);
 		frame.getContentPane().add(exit_button);
 
-		answer = new JLabel(
-				"tuk trqbva da sa kutiiki/ ?/ prazni mesta/ _ za populvane na bukvite");
+		// answer-label
+
+		answer = new JLabel("");
 		answer.setForeground(new Color(75, 0, 130));
 		answer.setFont(new Font("SimSun", Font.PLAIN, 30));
 		answer.setBackground(new Color(255, 255, 255));
@@ -338,28 +380,5 @@ public class HangmanFrame {
 		answer.setBounds(95, 71, 428, 85);
 		frame.getContentPane().add(answer);
 
-		pandichka = new JLabel("");
-		pandichka.setHorizontalAlignment(SwingConstants.CENTER);
-		Image pandaImg = new ImageIcon(this.getClass().getResource(
-				"/panda-happy.png")).getImage();
-		pandichka.setIcon(new ImageIcon(pandaImg));
-		pandichka.doLayout();
-		pandichka.setBounds(649, 137, 377, 358);
-		frame.getContentPane().add(pandichka);
-
-		frame.getContentPane().add(pandichka);
-		frame.setBackground(new Color(255, 192, 203));
-		frame.setIconImage(Toolkit
-				.getDefaultToolkit()
-				.getImage(
-						"D:\\Documents\\HackBulgaria\\Test\\Img\\ef282c4872e55b328a5535cdca0786eb.jpg"));
-		frame.setAlwaysOnTop(true);
-		frame.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
-		frame.setBounds(new Rectangle(0, 0, 1200, 600));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setTitle("ZleSme");
-		frame.setLocationRelativeTo(null);
 	}
-
 }
